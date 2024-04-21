@@ -1,0 +1,36 @@
+import numpy as np
+import math
+h=0.1
+yi=1
+y=[yi]
+ti=1
+tf=2
+n=(tf-ti)/h
+t=[ti]
+w=[g(ti)]
+c=0
+a=ti
+b=yi
+e_abs=[g(ti)-yi]
+e_rel=[(g(ti)-yi)/g(ti)]
+def f(y,t):
+  return (y/t -(y/t)*(y/t))
+def g(t):
+  return(t/(1+math.log(t)))
+for i in range(1,math.ceil(n+1)):
+  b=b+ h* f(b,a)
+  y.append(b)
+  a=a+h
+  t.append(a)
+  c=g(a)
+  w.append(c)
+  e1=c-b
+  e2=e1/c
+  e_abs.append(e1)
+  e_rel.append(e2)
+print("Independent variable grid points, t=",t)
+print("Solution y(t) using Euler Method is y=",y)
+print("Analytical solution w=",w)
+print("Absolute error, e_abs=",e_abs)
+print("Relative error, e_rel=",e_rel)
+
